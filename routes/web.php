@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return response->json("Welcome to habbit api");
+    return response()->json("Welcome to habbit api");
 });
