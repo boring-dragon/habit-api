@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
-    return response()->json("Welcome to habbit api");
+    return ['Laravel' => app()->version(), 'message' => 'welcome to the json api of habit-tracker'];
 });
+
+
