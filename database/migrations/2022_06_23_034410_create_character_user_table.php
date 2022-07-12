@@ -15,12 +15,9 @@ return new class extends Migration
     {
         Schema::create('character_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('character_id');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('character_id');
+            $table->foreignId('user_id');
             $table->timestamps();
-
-            $table->foreign('character_id')->references('id')->on('characters');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

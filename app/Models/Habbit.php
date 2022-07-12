@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Habbit extends Model
 {
@@ -15,4 +16,17 @@ class Habbit extends Model
         'habbit_name',
         'status'
     ];
+
+
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function habitType() : BelongsTo
+    {
+        return $this->belongsTo(HabitType::class);
+    }
+
+
 }

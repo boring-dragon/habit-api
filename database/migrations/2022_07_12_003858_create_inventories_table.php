@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->json('items');
             $table->timestamps();
         });
     }
