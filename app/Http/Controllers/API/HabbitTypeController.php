@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Habbit;
 use App\Models\HabbitType;
 use Illuminate\Http\Request;
 
@@ -15,17 +16,12 @@ class HabbitTypeController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $habbits = Habbit::with('user', 'habbit_type')->orderBy('name')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'data' => $habbits,
+            'message' => 'Habits retrieved successfully',
+        ]);
     }
 
     /**
@@ -36,7 +32,17 @@ class HabbitTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'descriptiom' => 'nullable',
+        ]);
+
+        $habbitType = HabbitType::create($request->all());
+
+        return response()->json([
+            'message' => 'Habit Type created successfully',
+            'data' => $habbitType,
+        ], 201);
     }
 
     /**
@@ -47,19 +53,13 @@ class HabbitTypeController extends Controller
      */
     public function show(HabbitType $habbitType)
     {
-        //
+        return response()->json([
+            'message' => 'Habit Type retrieved successfully',
+            'data' => $habbitType,
+        ], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\HabbitType  $habbitType
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(HabbitType $habbitType)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -70,7 +70,17 @@ class HabbitTypeController extends Controller
      */
     public function update(Request $request, HabbitType $habbitType)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'descriptiom' => 'nullable',
+        ]);
+
+        $habbitType->update($request->all());
+
+        return response()->json([
+            'message' => 'Habit Type updated successfully',
+            'data' => $habbitType,
+        ], 200);
     }
 
     /**
@@ -81,6 +91,10 @@ class HabbitTypeController extends Controller
      */
     public function destroy(HabbitType $habbitType)
     {
-        //
+        $habbitType->delete();
+
+        return response()->json([
+            'message' => 'Habit Type deleted successfully',
+        ], 200);
     }
 }
