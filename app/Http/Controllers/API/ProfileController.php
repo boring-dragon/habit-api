@@ -16,7 +16,7 @@ class ProfileController extends Controller
         ], 200);
     }
 
-    public function update()
+    public function update(Request $request)
     {
         // Handle the user profile update
     }

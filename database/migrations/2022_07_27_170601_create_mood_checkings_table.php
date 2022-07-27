@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('mood_checkings', function (Blueprint $table) {
             $table->id();
+            $table->enum('type', ['happy', 'sad', 'angry']);
             $table->foreignId('user_id');
-            $table->json('items');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('mood_checkings');
     }
 };

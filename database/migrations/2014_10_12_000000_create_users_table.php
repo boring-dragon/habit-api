@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('type')->default('user');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('newly_registered')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });
