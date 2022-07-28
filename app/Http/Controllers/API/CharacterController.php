@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Character;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CharacterController extends Controller
 {
@@ -23,14 +24,25 @@ class CharacterController extends Controller
         ], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function purchaseCharacter(Character $character)
     {
-        //
+        if(Auth::user()->wallet->balance < $character->price) {
+            return response()->json([
+                'message' => 'Not enough balance',
+            ], 400);
+        }
+
+        Auth::user()->characters()->attach($character);
+
+        Auth::user()->wallet->update([
+            'balance' => Auth::user()->wallet->balance - $character->price,
+        ]);
+
+        return response()->json([
+            'message' => 'Character purchased successfully',
+            'data' => $character,
+        ], 200);
     }
 
     /**

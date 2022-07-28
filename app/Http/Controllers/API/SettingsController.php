@@ -26,7 +26,7 @@ class SettingsController extends Controller
             'last_name' => 'required|string|max:255',
             'bio' => 'nullable|string|max:255',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . Auth::user()->id],
-            'password' => 'nullable'
+            'password' => 'nullable|string|min:6',
         ]);
 
         Auth::user()->update([
@@ -34,8 +34,13 @@ class SettingsController extends Controller
             'last_name' => $request->last_name,
             'bio' => $request->bio,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
         ]);
+
+        if ($request->has('password')) {
+            Auth::user()->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
 
         return response()->json([
             'message' => 'User details saved successfully'
@@ -58,5 +63,4 @@ class SettingsController extends Controller
             'message' => 'Your account deleted successfully',
         ], 200);
     }
-
 }

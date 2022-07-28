@@ -16,7 +16,7 @@ class HabbitController extends Controller
      */
     public function index()
     {
-        $habbits = Auth::user()->habbits;
+        $habbits = Auth::user()->habbits()->where('status', 'created')->orderBy('created_at', 'asc')->get();
 
         return response()->json([
             'message' => 'Habit retrieved successfully',
@@ -24,14 +24,42 @@ class HabbitController extends Controller
         ], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function updateHabbitTarget(Request $request, Habbit $habbit)
     {
-        //
+
+        $habbit->update([
+            'current_target_amount' => $habbit->current_target_amount + 1,
+        ]);
+
+        return response()->json([
+            'message' => 'Habit updated successfully',
+            'data' => $habbit,
+        ], 200);
+    }
+
+    public function decreaseHabbitTarget(Request $request, Habbit $habbit)
+    {
+        $habbit->update([
+            'current_target_amount' => $habbit->current_target_amount - 1,
+        ]);
+
+        return response()->json([
+            'message' => 'Habit updated successfully',
+            'data' => $habbit,
+        ], 200);
+    }
+
+    public function markHabbitAsCompleted(Request $request, Habbit $habbit)
+    {
+        $habbit->update([
+            'status' => 'completed',
+        ]);
+
+        return response()->json([
+            'message' => 'Habit completed successfully',
+            'data' => $habbit,
+        ], 200);
     }
 
     /**
@@ -42,7 +70,20 @@ class HabbitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'habbit_type_id' => 'nullable',
+            'description' => 'nullable|string',
+            'target_amount' => 'required|integer',
+            'targeted_at' => 'required'
+        ]);
+
+        $habbit = Auth::user()->habbits()->create($request->all());
+
+        return response()->json([
+            'message' => 'Habit Created successfully',
+            'data' => $habbit
+        ], 200);
     }
 
     /**
