@@ -1,4 +1,4 @@
-de .<?php
+<?php
 
 use App\Http\Controllers\API\MoodCheckingController;
 use Illuminate\Http\Request;
