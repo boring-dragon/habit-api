@@ -27,6 +27,7 @@ class User extends Authenticatable
         'password',
         'type',
         'email_verified_at',
+        'character_id',
         'bio'
     ];
 
@@ -93,7 +94,7 @@ class User extends Authenticatable
 
     public function characters(): BelongsToMany
     {
-        return $this->belongsToMany(Character::class);
+        return $this->belongsToMany(Character::class)->withTimestamps();
     }
 
     public function character(): HasOne

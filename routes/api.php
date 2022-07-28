@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/purchaseCharacter/{character}', [CharacterController::class, 'purchaseCharacter']);
 
     Route::get('/getInventoryItems', [CharacterController::class, 'getInventoryItems']);
+    Route::post('/changeCharacter/{character}', [CharacterController::class, 'changeCharacter']);
 
     Route::delete('/deleteAccount', [SettingsController::class, 'destroy']);
 

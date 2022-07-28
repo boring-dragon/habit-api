@@ -56,15 +56,17 @@ class CharacterController extends Controller
         ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Character  $character
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Character $character)
+
+    public function changeCharacter(Character $character)
     {
-        //
+        Auth::user()->update([
+            'character_id' => $character->id,
+        ]);
+
+        return response()->json([
+            'message' => 'Character changed successfully',
+            'data' => $character,
+        ], 200);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Character;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,13 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        //php artisan db:seed
-        // Pass: password
-
-        \App\Models\User::factory()->create([
-             'email' => 'test@example.com',
-         ]);
+        Character::factory()->count(10)->create();
     }
 }
