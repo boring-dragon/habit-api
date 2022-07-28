@@ -15,7 +15,7 @@ class SettingsController extends Controller
     {
         return response()->json([
             'data' => Auth::user()
-        ],200);
+        ], 200);
     }
 
 
@@ -25,7 +25,7 @@ class SettingsController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'bio' => 'nullable|string|max:255',
-           'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.Auth::user()->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . Auth::user()->id],
             'password' => 'nullable'
         ]);
 
