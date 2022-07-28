@@ -56,6 +56,10 @@ class HabbitController extends Controller
             'status' => 'completed',
         ]);
 
+        Auth::user()->wallet->update([
+            'balance' => Auth::user()->wallet->balance + 8,
+        ]);
+
         return response()->json([
             'message' => 'Habit completed successfully',
             'data' => $habbit,
