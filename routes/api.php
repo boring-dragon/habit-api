@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\MoodCheckingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,5 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/mood-checking', [MoodCheckingController::class, 'show']);
     Route::post('/mood-checkings',  [MoodCheckingController::class, 'store']);
+    Route::post('/saveUserDetails', [SettingsController::class, 'update']);
 });
