@@ -50,4 +50,13 @@ class SettingsController extends Controller
             'data' => $wallet
         ], 200);
     }
+    public function destroy()
+    {
+        Auth::user()->delete();
+
+        return response()->json([
+            'message' => 'Your account deleted successfully',
+        ], 200);
+    }
+
 }

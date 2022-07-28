@@ -39,4 +39,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/getWalletBalance', [SettingsController::class, 'getWalletBalance']);
 
     Route::get('/getCharacters', [CharacterController::class, 'index']);
+    Route::delete('/deleteAccount', [SettingsController::class, 'destroy']);
 });
