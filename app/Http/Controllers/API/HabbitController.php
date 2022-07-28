@@ -47,7 +47,10 @@ class HabbitController extends Controller
      */
     public function show(Habbit $habbit)
     {
-        //
+        return response()->json([
+            'message' => 'Habit retrieved successfully',
+            'data' => $habbit::all(),
+        ], 200);
     }
 
     /**

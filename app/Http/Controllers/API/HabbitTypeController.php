@@ -55,7 +55,7 @@ class HabbitTypeController extends Controller
     {
         return response()->json([
             'message' => 'Habit Type retrieved successfully',
-            'data' => $habbitType,
+            'data' => $habbitType::all(),
         ], 200);
     }
 

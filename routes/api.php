@@ -4,6 +4,10 @@ use App\Http\Controllers\API\MoodCheckingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\SettingsController;
+use App\Http\Controllers\API\HabbitController;
+use App\Http\Controllers\API\HabbitTypeController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +31,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::put('/saveUserDetails', [SettingsController::class, 'update']);
     Route::get('/getUserDetails', [SettingsController::class, 'show']);
+
+    Route::get('/getHabbits', [HabbitController::class, 'show']);
+    Route::get('/getHabbitTypes', [HabbitTypeController::class, 'show']);
+
+
 
 });
