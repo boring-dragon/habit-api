@@ -16,6 +16,15 @@ class Character extends Model
         'image_path'
     ];
 
+    protected $appends = [
+        'character_img'
+    ];
+
+    public function getCharacterImgAttribute() : string
+    {
+        return "https://robohash.org/". $this->image_path;
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);

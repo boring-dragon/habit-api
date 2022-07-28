@@ -12,9 +12,13 @@ class Habbit extends Model
 
     protected $fillable = [
         'user_id',
+        'name',
+        'description',
         'habbit_type_id',
-        'habbit_name',
-        'status'
+        'status',
+        'current_target_amount',
+        'target_amount',
+        'targeted_at',
     ];
 
 

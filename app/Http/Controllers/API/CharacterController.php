@@ -15,7 +15,12 @@ class CharacterController extends Controller
      */
     public function index()
     {
-        //
+        $characters = Character::all();
+
+        return response()->json([
+            'message' => 'Character retrieved successfully',
+            'data' => $characters,
+        ], 200);
     }
 
     /**

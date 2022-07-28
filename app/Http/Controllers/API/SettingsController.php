@@ -41,4 +41,13 @@ class SettingsController extends Controller
             'message' => 'User details saved successfully'
         ], 201);
     }
+
+    public function getWalletBalance()
+    {
+        $wallet = Auth::user()->wallet;
+
+        return response()->json([
+            'data' => $wallet
+        ], 200);
+    }
 }

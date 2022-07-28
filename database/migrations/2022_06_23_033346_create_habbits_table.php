@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('status')->default('created');
+            $table->unsignedBigInteger('current_target_amount')->default(0);
+            $table->unsignedBigInteger('target_amount')->default(0);
             $table->dateTime('targeted_at')->nullable();
             $table->timestamps();
         });

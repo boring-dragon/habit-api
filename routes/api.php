@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CharacterController;
 use App\Http\Controllers\API\MoodCheckingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,4 +35,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/getHabbits', [HabbitController::class, 'index']);
     Route::get('/getHabbitTypes', [HabbitTypeController::class, 'index']);
+
+    Route::get('/getWalletBalance', [SettingsController::class, 'getWalletBalance']);
+
+    Route::get('/getCharacters', [CharacterController::class, 'index']);
 });
