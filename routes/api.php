@@ -34,4 +34,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/getHabbits', [HabbitController::class, 'index']);
     Route::get('/getHabbitTypes', [HabbitTypeController::class, 'index']);
+
+    Route::delete('/deleteAccount', [SettingsController::class, 'destroy']);
 });

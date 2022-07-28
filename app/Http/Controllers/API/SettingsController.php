@@ -41,4 +41,14 @@ class SettingsController extends Controller
             'message' => 'User details saved successfully'
         ], 201);
     }
+
+    public function destroy()
+    {
+        Auth::user()->delete();
+
+        return response()->json([
+            'message' => 'Your account deleted successfully',
+        ], 200);
+    }
+
 }
