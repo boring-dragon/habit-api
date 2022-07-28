@@ -41,7 +41,8 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'full_name'
+        'full_name',
+        'current_mood'
 
     ];
 
@@ -62,6 +63,16 @@ class User extends Authenticatable
     public function getFullNameAttribute(): string
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    /**
+     * Get the user's current mood.
+     *
+     * @return string
+     */
+    public function getCurrentMoodAttribute(): string
+    {
+        return $this->mood_checkings()->whereDate('created_at', today())->latest()->first()->type;
     }
 
     public function mood_checkings(): HasMany
