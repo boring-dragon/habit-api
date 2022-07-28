@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('habbits', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('habbit_type_id')->nullable();
+            $table->foreignId('habbit_type_id')->nullable();
+            $table->text('description')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('status')->default('created');
+            $table->dateTime('targeted_at')->nullable();
             $table->timestamps();
-
-            $table->foreign('habbit_type_id')->references('id')->on('habbit_types');
         });
     }
 
