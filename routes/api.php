@@ -1,4 +1,4 @@
-<?php
+de .<?php
 
 use App\Http\Controllers\API\MoodCheckingController;
 use Illuminate\Http\Request;
@@ -24,7 +24,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/mood-checking', [MoodCheckingController::class, 'show']);
     Route::post('/mood-checkings',  [MoodCheckingController::class, 'store']);
-    Route::post('/saveUserDetails', [SettingsController::class, 'update']);
+
+    Route::put('/saveUserDetails', [SettingsController::class, 'update']);
     Route::get('/getUserDetails', [SettingsController::class, 'show']);
 
 });

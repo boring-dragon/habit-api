@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
@@ -20,16 +21,21 @@ class SettingsController extends Controller
 
     public function update(Request $request)
     {
-
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'bio' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
-            'password' => 'required|string|max:255'
+            'bio' => 'nullable|string|max:255',
+           'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.Auth::user()->id],
+            'password' => 'nullable'
         ]);
-        
-        Auth::user()->update($request->all());
+
+        Auth::user()->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'bio' => $request->bio,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
 
         return response()->json([
             'message' => 'User details saved successfully'
