@@ -16,7 +16,7 @@ class CharacterController extends Controller
      */
     public function index()
     {
-        $characters = Character::all();
+        $characters = Character::whereNotIn('id', Auth::user()->characters->pluck('id'))->get();
 
         return response()->json([
             'message' => 'Character retrieved successfully',
@@ -45,15 +45,15 @@ class CharacterController extends Controller
         ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function getInventoryItems()
     {
-        //
+        $inventoryItems = Auth::user()->characters;
+
+        return response()->json([
+            'message' => 'Inventory items retrieved successfully',
+            'data' => $inventoryItems,
+        ], 200);
     }
 
     /**

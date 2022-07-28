@@ -42,7 +42,8 @@ class User extends Authenticatable
 
     protected $appends = [
         'full_name',
-        'current_mood'
+        'current_mood',
+        'character_img'
 
     ];
 
@@ -75,6 +76,11 @@ class User extends Authenticatable
         return $this->mood_checkings()->whereDate('created_at', today())->latest()->first()?->type;
     }
 
+    public function getCharacterImgAttribute(): ?string
+    {
+        return $this->character ? "https://robohash.org/". $this->character->image_path: "https://robohash.org/default";
+    }
+
     public function habbits(): HasMany
     {
         return $this->hasMany(Habbit::class);
@@ -88,6 +94,11 @@ class User extends Authenticatable
     public function characters(): BelongsToMany
     {
         return $this->belongsToMany(Character::class);
+    }
+
+    public function character(): HasOne
+    {
+        return $this->hasOne(Character::class, 'id', 'character_id');
     }
 
     public function wallet() : HasOne
