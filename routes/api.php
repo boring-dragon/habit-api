@@ -25,4 +25,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/mood-checking', [MoodCheckingController::class, 'show']);
     Route::post('/mood-checkings',  [MoodCheckingController::class, 'store']);
     Route::post('/saveUserDetails', [SettingsController::class, 'update']);
+    Route::get('/getUserDetails', [SettingsController::class, 'show']);
+
 });

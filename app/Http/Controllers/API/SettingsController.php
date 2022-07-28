@@ -9,13 +9,24 @@ use Illuminate\Support\Facades\Auth;
 
 class SettingsController extends Controller
 {
+
+    public function show()
+    {
+        return response()->json([
+            'data' => Auth::user()
+        ],200);
+    }
+
+
     public function update(Request $request)
     {
 
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|string|max:255'
+            'bio' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'password' => 'required|string|max:255'
         ]);
         
         Auth::user()->update($request->all());
