@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Habbit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HabbitController extends Controller
 {
@@ -15,7 +16,12 @@ class HabbitController extends Controller
      */
     public function index()
     {
-        //
+        $habbits = Auth::user()->habbits;
+
+        return response()->json([
+            'message' => 'Habit retrieved successfully',
+            'data' => $habbits,
+        ], 200);
     }
 
     /**
@@ -49,7 +55,7 @@ class HabbitController extends Controller
     {
         return response()->json([
             'message' => 'Habit retrieved successfully',
-            'data' => $habbit::all(),
+            'data' => $habbit,
         ], 200);
     }
 

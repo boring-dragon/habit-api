@@ -16,10 +16,9 @@ class HabbitTypeController extends Controller
      */
     public function index()
     {
-        $habbits = Habbit::with('user', 'habbit_type')->orderBy('name')->get();
 
         return response()->json([
-            'data' => $habbits,
+            'data' => HabbitType::all(),
             'message' => 'Habits retrieved successfully',
         ]);
     }
@@ -55,7 +54,7 @@ class HabbitTypeController extends Controller
     {
         return response()->json([
             'message' => 'Habit Type retrieved successfully',
-            'data' => $habbitType::all(),
+            'data' => $habbitType
         ], 200);
     }
 

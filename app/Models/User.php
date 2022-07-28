@@ -70,9 +70,14 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function getCurrentMoodAttribute(): string
+    public function getCurrentMoodAttribute(): ?string
     {
-        return $this->mood_checkings()->whereDate('created_at', today())->latest()->first()->type;
+        return $this->mood_checkings()->whereDate('created_at', today())->latest()->first()?->type;
+    }
+
+    public function habbits(): HasMany
+    {
+        return $this->hasMany(Habbit::class);
     }
 
     public function mood_checkings(): HasMany

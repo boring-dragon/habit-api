@@ -32,9 +32,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::put('/saveUserDetails', [SettingsController::class, 'update']);
     Route::get('/getUserDetails', [SettingsController::class, 'show']);
 
-    Route::get('/getHabbits', [HabbitController::class, 'show']);
-    Route::get('/getHabbitTypes', [HabbitTypeController::class, 'show']);
-
-
-
+    Route::get('/getHabbits', [HabbitController::class, 'index']);
+    Route::get('/getHabbitTypes', [HabbitTypeController::class, 'index']);
 });
