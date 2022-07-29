@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/getHabbits', [HabbitController::class, 'index']);
 
+    Route::get('/getHabbitsCreatedToday', [HabbitController::class, 'getHabbitsCreatedToday']);
+
     Route::get('/getCounts', function() {
 
         return response()->json([

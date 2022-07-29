@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Habbit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class HabbitController extends Controller
@@ -104,15 +105,15 @@ class HabbitController extends Controller
         ], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Habbit  $habbit
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Habbit $habbit)
+
+    public function getHabbitsCreatedToday()
     {
-        //
+        $habbits = Auth::user()->habbits()->whereDate('created_at', '=', Carbon::today())->get();
+
+        return response()->json([
+            'message' => 'Habit retrieved successfully',
+            'data' => $habbits,
+        ], 200);
     }
 
     /**
